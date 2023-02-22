@@ -25,14 +25,11 @@ if (process.env.NODE_ENV === 'production') {
   app.use(cors(corsOptions))
 }
 
-app.get('/**', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'))
-})
 
 // app.use(
-//   cors({
-//     origin: "*",
-//     credentials: true
+  //   cors({
+    //     origin: "*",
+    //     credentials: true
 //   })
 // );
 
@@ -55,6 +52,7 @@ io.on("connection", (socket) => {
 });
 
 app.get("/flights", (req, res) => {
+  console.log(`foo = `)
   res.json({ flights });
 });
 
@@ -63,6 +61,9 @@ app.get("/flights/:flightNum", (req, res) => {
   res.json(flight);
 });
 
+app.get('/**', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'))
+})
 const port = process.env.PORT || 3030
 
 server.listen(port, () => {
@@ -91,26 +92,26 @@ function publishEntityUpdate(socket: Socket) {
         case "hangar":
           randomFlight.status = chance >= 0.9 ? "malfunction" : "airborne";
           break;
-        case "airborne":
-          randomFlight.status =
+          case "airborne":
+            randomFlight.status =
             chance >= 0.9 ? "malfunction" : chance >= 0.7 ? "hangar" : "airborne";
+            break;
+            case "malfunction":
+              randomFlight.status = chance >= 0.9 ? "hangar" : "malfunction";
           break;
-        case "malfunction":
-          randomFlight.status = chance >= 0.9 ? "hangar" : "malfunction";
-          break;
-      }
-      break;
-    case 1: // time delay
-      const delayByMin = Math.floor(Math.random() * 120);
-      randomFlight.takeoffTime = moment(randomFlight.takeoffTime, TIME_FORMAT)
+        }
+        break;
+        case 1: // time delay
+        const delayByMin = Math.floor(Math.random() * 120);
+        randomFlight.takeoffTime = moment(randomFlight.takeoffTime, TIME_FORMAT)
         .add(delayByMin, "minutes")
         .format(TIME_FORMAT);
-      randomFlight.landingTime = moment(randomFlight.landingTime, TIME_FORMAT)
+        randomFlight.landingTime = moment(randomFlight.landingTime, TIME_FORMAT)
         .add(delayByMin, "minutes")
         .format(TIME_FORMAT);
-      break;
-    case 2: // destination update
-      const newDestination = airports[Math.floor(Math.random() * 50)];
+        break;
+        case 2: // destination update
+        const newDestination = airports[Math.floor(Math.random() * 50)];
       randomFlight.landingAirport = newDestination;
       break;
   }

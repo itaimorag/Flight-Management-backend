@@ -26,9 +26,6 @@ else {
     };
     app.use((0, cors_1.default)(corsOptions));
 }
-app.get('/**', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
 // app.use(
 //   cors({
 //     origin: "*",
@@ -51,11 +48,15 @@ io.on("connection", (socket) => {
     });
 });
 app.get("/flights", (req, res) => {
+    console.log(`foo = `);
     res.json({ flights });
 });
 app.get("/flights/:flightNum", (req, res) => {
     const flight = flights.find((p) => p.flightNumber === req.params.flightNum);
     res.json(flight);
+});
+app.get('/**', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 const port = process.env.PORT || 3030;
 server.listen(port, () => {
