@@ -2,10 +2,10 @@
   "name": "entity-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx tsc && node out/index.js"
+    "start": "npx tsc && node out/index.ts"
   },
   "author": "",
   "license": "ISC",

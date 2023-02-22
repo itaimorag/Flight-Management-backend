@@ -11,6 +11,9 @@ const path = require('path')
 const TIME_FORMAT = "DD/MM/yyyy - HH:mm";
 
 const app = express();
+
+const server = http.createServer(app);
+
 app.use(express.json());
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.resolve(__dirname, 'public')))
@@ -29,7 +32,6 @@ if (process.env.NODE_ENV === 'production') {
 //   })
 // );
 
-const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: { origin: "*" },
