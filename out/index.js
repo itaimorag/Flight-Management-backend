@@ -17,7 +17,7 @@ const app = (0, express_1.default)();
 const server = http_1.default.createServer(app);
 app.use(express_1.default.json());
 if (process.env.NODE_ENV === 'production') {
-    app.use(express_1.default.static(path.resolve(__dirname, 'public')));
+    app.use(express_1.default.static(path.resolve(__dirname, 'out', 'public')));
 }
 else {
     const corsOptions = {
@@ -56,7 +56,7 @@ app.get("/flights/:flightNum", (req, res) => {
     res.json(flight);
 });
 app.get('/**', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'out', 'public', 'index.html'));
 });
 const port = process.env.PORT || 3030;
 server.listen(port, () => {
