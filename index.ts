@@ -61,12 +61,8 @@ server.listen(PORT, () => {
       landingAirport: airports[randomAP2],
     });
   }
-  console.log(`flights = `, flights[10],flights[11])
 });
-var counter=0
 function publishEntityUpdate(socket: Socket) {
-  console.log(`hi = `,counter)
-  counter++
   const randomIndex = Math.floor(Math.random() * flights.length);
   const randomFlight = flights[randomIndex];
   const actionType = Math.floor(Math.random() * 3);
