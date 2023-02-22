@@ -58,7 +58,9 @@ app.get("/flights/:flightNum", (req, res) => {
   const flight = flights.find((p) => p.flightNumber === req.params.flightNum);
   res.json(flight);
 });
+
 const port = process.env.PORT || 3030
+
 server.listen(port, () => {
   console.log("server listening on port", port);
   for (let i = 0; i < 50; i++) {
