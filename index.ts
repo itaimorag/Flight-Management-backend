@@ -7,7 +7,7 @@ import { generateFlightNumber } from "./utils";
 import { airports } from "./airportList";
 import moment from "moment";
 
-const PORT = 3030;
+// const PORT = 3030;
 const TIME_FORMAT = "DD/MM/yyyy - HH:mm";
 
 const app = express();
@@ -46,9 +46,9 @@ app.get("/flights/:flightNum", (req, res) => {
   const flight = flights.find((p) => p.flightNumber === req.params.flightNum);
   res.json(flight);
 });
-
-server.listen(PORT, () => {
-  console.log("server listening on port", PORT);
+const port = process.env.PORT || 3030
+server.listen(port, () => {
+  console.log("server listening on port", port);
   for (let i = 0; i < 50; i++) {
     const randomAP1 = Math.floor(Math.random() * 50);
     const randomAP2 = Math.floor(Math.random() * 50);
