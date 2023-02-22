@@ -104,4 +104,4 @@ dist
 .tern-port
 
 # compiled TS
-out/
+# out/
